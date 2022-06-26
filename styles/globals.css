@@ -10,9 +10,3 @@ html {
 		font-family: "Inter var", sans-serif;
 	}
 }
-
-.body {
-	display: flex;
-	justify-content: center;
-	gap: 2rem;
-}
