@@ -17,18 +17,21 @@ export function Navbar() {
 	const cn = classnames.bind(styles);
 
 	return (
-		<nav className={cn("nav flex justify-around pt-4")}>
-			<div>
+		<nav
+			className={cn(
+				"mobile_nav nav mx-auto flex w-4/5 items-center justify-between pt-4"
+			)}
+		>
+			<div className="flex items-center gap-16">
 				<Logo className={""} />
+				<ul className="flex gap-4">
+					{navItems.map((item) => (
+						<NavItem key={item.id}>{item.name}</NavItem>
+					))}
+				</ul>
 			</div>
 
-			<ul className="flex gap-4">
-				{navItems.map((item) => (
-					<NavItem key={item.id}>{item.name}</NavItem>
-				))}
-			</ul>
-
-			<div className="flex gap-2">
+			<div className="flex gap-6">
 				<RemoteButton>Login</RemoteButton>
 				<RemoteButton type="outline">Register</RemoteButton>
 			</div>
@@ -40,7 +43,7 @@ function NavItem(props) {
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	return (
-		<li className="flex items-center font-medium  gap-1">
+		<li className="flex items-center gap-1  font-medium">
 			{props.children}
 			<span>{showDropdown ? <UpArrow /> : <DownArrow />}</span>
 		</li>
