@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from "./remote-landing.module.css";
-import classnames from "classnames/bind";
 import Logo from "../../public/assets/remote-landing/logo.svg";
-import UpArrow from "../../public/assets/remote-landing/icon-arrow-up.svg";
 import DownArrow from "../../public/assets/remote-landing/icon-arrow-down.svg";
 import RemoteButton from "./RemoteButton";
 
@@ -13,39 +11,41 @@ const navItems = [
 	{ id: 4, name: "about" },
 ];
 
-export function Navbar() {
-	const cn = classnames.bind(styles);
-
+export default function Navbar() {
 	return (
-		<nav
-			className={cn(
-				"mobile_nav nav mx-auto flex w-4/5 items-center justify-between pt-4"
-			)}
-		>
-			<div className="flex items-center gap-16">
-				<Logo className={""} />
-				<ul className="flex gap-4">
-					{navItems.map((item) => (
-						<NavItem key={item.id}>{item.name}</NavItem>
+		<nav className={styles.nav}>
+			<div className={styles.container}>
+				<Logo />
+				<ul className={styles.nav_links}>
+					{navItems.map((navItem) => (
+						<NavItem key={navItem.id} {...navItem} />
 					))}
 				</ul>
-			</div>
-
-			<div className="flex gap-6">
-				<RemoteButton>Login</RemoteButton>
-				<RemoteButton type="outline">Register</RemoteButton>
+				<div className={styles.btn_container}>
+					<RemoteButton>Login</RemoteButton>
+					<RemoteButton type="outline">Register</RemoteButton>
+				</div>
 			</div>
 		</nav>
 	);
 }
 
-function NavItem(props) {
-	const [showDropdown, setShowDropdown] = useState(false);
+function NavItem({ name }) {
+	const [showDropdown, setShowDropDown] = useState(false);
 
 	return (
-		<li className="flex items-center gap-1  font-medium">
-			{props.children}
-			<span>{showDropdown ? <UpArrow /> : <DownArrow />}</span>
+		<li
+			className={styles.nav_item}
+			onClick={() => setShowDropDown(!showDropdown)}
+		>
+			{name}{" "}
+			<span>
+				<DownArrow
+					className={`${styles.arrow} ${
+						showDropdown ? styles.up_arrow : styles.down_arrow
+					}`}
+				/>
+			</span>
 		</li>
 	);
 }

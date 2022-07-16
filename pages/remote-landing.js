@@ -1,4 +1,4 @@
-import { Navbar } from "../components/remote-landing/Navbar";
+import Navbar from "../components/remote-landing/Navbar";
 
 export default function Landing() {
 	return (
